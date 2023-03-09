@@ -27,5 +27,20 @@ public class PeliculasController {
 
     @Autowired
     private ISalaService salaService;
-    
+            @GetMapping("/peliculas")
+    public String index(Model model) {
+        List<Sala> listaPeliculas = peliculasService.getAllPeliculas();
+        model.addAttribute("tituloVisualizacion", "Acá puedes visualizar las peliculas");
+        model.addAttribute("tituloPeliculas", "Próximas Peliculas");
+        model.addAttribute("peliculas", listaPeliculas);
+        return "peliculas";
+    }
+
+    @GetMapping("/peliculasN")
+    public String crearPeliculas(Model model) {
+        List<Peliculas> listaSala = salaService.listSala();
+        model.addAttribute("peliculas", new Peliculas());
+        model.addAttribute("sala", listaSala);
+        return "crear";
+    }
 }
